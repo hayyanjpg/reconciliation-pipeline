@@ -24,7 +24,7 @@ Proyek ini dibangun untuk mendemonstrasikan kompetensi **Data Engineer**:
 
 ---
 
-## 📸 Tampilan Antarmuka (Screenshots)
+##  Tampilan Antarmuka (Screenshots)
 
 Berikut preview antarmuka aplikasi pemantauan rekonsiliasi dan kualitas data:
 
