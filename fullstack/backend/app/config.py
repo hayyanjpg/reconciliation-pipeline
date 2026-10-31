@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 import os
 from pathlib import Path
@@ -20,7 +20,7 @@ RUN_TTL_HOURS = int(os.getenv("RUN_TTL_HOURS", "24"))
 CORS_ORIGINS = [
     origin.strip()
     for origin in os.getenv(
-        "CORS_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173"
+        "CORS_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173,*"
     ).split(",")
     if origin.strip()
 ]

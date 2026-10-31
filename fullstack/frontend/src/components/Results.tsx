@@ -361,7 +361,7 @@ export function Results({
         </div>
       </div>
 
-      <div className="mt-6 flex flex-wrap gap-2">
+      <div className="mt-6 flex w-full max-w-full items-center gap-2 overflow-x-auto pb-1.5 scrollbar-thin">
         {TABS.map((item) => (
           <button
             key={item.key}
@@ -369,8 +369,8 @@ export function Results({
             onClick={() => setTab(item.key)}
             className={
               tab === item.key
-                ? "rounded-lg bg-brand-700 px-3.5 py-2 text-xs font-semibold text-white"
-                : "rounded-lg border border-line bg-white px-3.5 py-2 text-xs font-semibold text-ink-soft transition hover:bg-surface-muted"
+                ? "shrink-0 rounded-lg bg-brand-700 px-3.5 py-2 text-xs font-semibold text-white shadow-sm"
+                : "shrink-0 rounded-lg border border-line bg-white px-3.5 py-2 text-xs font-semibold text-ink-soft transition hover:bg-surface-muted"
             }
           >
             {item.label}
