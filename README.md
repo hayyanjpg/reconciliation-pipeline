@@ -1,4 +1,15 @@
-﻿# Data Quality QA Portfolio - Rekonsiliasi Order & Payment
+---
+title: DQ Studio Backend
+emoji: 🛡️
+colorFrom: indigo
+colorTo: green
+sdk: gradio
+sdk_version: "4.44.0"
+app_file: app.py
+pinned: false
+---
+
+# Data Quality QA Portfolio - Rekonsiliasi Order & Payment
 
 Pipeline Data Quality Assurance end-to-end untuk data order dan payment
 multichannel: normalisasi, 16 SQL check, rekonsiliasi, laporan harian, dan
