@@ -1,11 +1,9 @@
-# HF Space Dependencies (Streamlit + FastAPI Backend)
-gradio>=5.4.0
-huggingface_hub>=0.26.0
-pandas>=2.0
-streamlit>=1.30
-plotly>=5.18
+# HF Space Dependencies (FastAPI Backend)
 fastapi>=0.110
 uvicorn[standard]>=0.29
 sqlalchemy>=2.0
 python-multipart>=0.0.9
 httpx>=0.27
+pandas>=2.0
+plotly>=5.18
+pytest>=7.0
