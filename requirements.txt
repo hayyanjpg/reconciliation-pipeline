@@ -1,4 +1,6 @@
 # HF Space Dependencies (Streamlit + FastAPI Backend)
+gradio>=5.4.0
+huggingface_hub>=0.26.0
 pandas>=2.0
 streamlit>=1.30
 plotly>=5.18
