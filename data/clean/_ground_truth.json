@@ -1,0 +1,27 @@
+{
+  "mode": "clean",
+  "seed": 42,
+  "as_of": "2026-10-31",
+  "base_orders": 220,
+  "order_rows_written": 220,
+  "payment_rows_written": 220,
+  "expected": {
+    "cross_channel_duplicates": 0,
+    "duplicate_order_rows": 0,
+    "duplicate_order_id_check": 0,
+    "duplicate_payment_per_order": 0,
+    "amount_mismatch": 0,
+    "missing_customer_id": 0,
+    "invalid_status": 0,
+    "non_positive_amount": 0,
+    "non_positive_paid_amount": 0,
+    "future_order_date": 0,
+    "unparseable_order_date": 0,
+    "missing_amount": 0,
+    "orders_without_payment": 0,
+    "orphan_payments": 0,
+    "payment_before_order": 0,
+    "late_payment": 0,
+    "missing_paid_at": 0
+  }
+}

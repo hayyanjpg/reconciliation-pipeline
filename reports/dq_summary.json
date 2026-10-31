@@ -1,0 +1,394 @@
+{
+  "as_of": "2026-10-31",
+  "generated_at": "2026-10-31T07:10:09",
+  "check_summary": {
+    "total": 16,
+    "passed": 2,
+    "failed": 14,
+    "errored": 0,
+    "pass_rate": 12.5
+  },
+  "checks": [
+    {
+      "name": "duplicate_order_id",
+      "category": "uniqueness",
+      "severity": "critical",
+      "table": "orders",
+      "description": "order_id harus unik setelah normalisasi. Lebih dari satu baris berarti duplikat.",
+      "failed_rows": 9,
+      "total_rows": 230,
+      "status": "FAIL",
+      "error": null,
+      "sample": [
+        {
+          "order_id": "ORD-1008",
+          "occurrences": 3
+        },
+        {
+          "order_id": "ORD-1001",
+          "occurrences": 2
+        },
+        {
+          "order_id": "ORD-1002",
+          "occurrences": 2
+        }
+      ]
+    },
+    {
+      "name": "duplicate_payment_per_order",
+      "category": "uniqueness",
+      "severity": "critical",
+      "table": "payments",
+      "description": "Satu order seharusnya hanya punya satu pembayaran valid. Lebih dari satu berarti double charge.",
+      "failed_rows": 4,
+      "total_rows": 214,
+      "status": "FAIL",
+      "error": null,
+      "sample": [
+        {
+          "order_id": "ORD-1121",
+          "payment_count": 2
+        },
+        {
+          "order_id": "ORD-1165",
+          "payment_count": 2
+        },
+        {
+          "order_id": "ORD-1211",
+          "payment_count": 2
+        }
+      ]
+    },
+    {
+      "name": "missing_customer_id",
+      "category": "completeness",
+      "severity": "warning",
+      "table": "orders",
+      "description": "customer_id wajib terisi agar order bisa ditelusuri ke pelanggan.",
+      "failed_rows": 5,
+      "total_rows": 230,
+      "status": "FAIL",
+      "error": null,
+      "sample": [
+        {
+          "order_id": "ORD-1064",
+          "customer_id": null
+        },
+        {
+          "order_id": "ORD-1110",
+          "customer_id": null
+        },
+        {
+          "order_id": "ORD-1144",
+          "customer_id": null
+        }
+      ]
+    },
+    {
+      "name": "missing_order_date",
+      "category": "completeness",
+      "severity": "critical",
+      "table": "orders",
+      "description": "order_date kosong total di file sumber.",
+      "failed_rows": 0,
+      "total_rows": 230,
+      "status": "PASS",
+      "error": null,
+      "sample": []
+    },
+    {
+      "name": "unparseable_order_date",
+      "category": "validity",
+      "severity": "critical",
+      "table": "orders",
+      "description": "order_date ada isinya tetapi formatnya tidak dikenali sehingga gagal dinormalisasi.",
+      "failed_rows": 2,
+      "total_rows": 230,
+      "status": "FAIL",
+      "error": null,
+      "sample": [
+        {
+          "order_id": "ORD-1098",
+          "raw_order_date": "31/13/2026"
+        },
+        {
+          "order_id": "ORD-1127",
+          "raw_order_date": "31/13/2026"
+        }
+      ]
+    },
+    {
+      "name": "missing_amount",
+      "category": "completeness",
+      "severity": "critical",
+      "table": "orders",
+      "description": "amount kosong atau tidak bisa diparse menjadi angka.",
+      "failed_rows": 1,
+      "total_rows": 230,
+      "status": "FAIL",
+      "error": null,
+      "sample": [
+        {
+          "order_id": "ORD-1086",
+          "raw_amount": "N/A"
+        }
+      ]
+    },
+    {
+      "name": "missing_paid_at",
+      "category": "completeness",
+      "severity": "warning",
+      "table": "payments",
+      "description": "paid_at wajib ada untuk pembayaran yang sudah berstatus PAID.",
+      "failed_rows": 2,
+      "total_rows": 214,
+      "status": "FAIL",
+      "error": null,
+      "sample": [
+        {
+          "payment_id": "PAY-0021",
+          "order_id": "ORD-1023",
+          "status": "PAID"
+        },
+        {
+          "payment_id": "PAY-0035",
+          "order_id": "ORD-1037",
+          "status": "PAID"
+        }
+      ]
+    },
+    {
+      "name": "non_positive_amount",
+      "category": "validity",
+      "severity": "critical",
+      "table": "orders",
+      "description": "Nominal order harus lebih besar dari nol.",
+      "failed_rows": 2,
+      "total_rows": 230,
+      "status": "FAIL",
+      "error": null,
+      "sample": [
+        {
+          "order_id": "ORD-1043",
+          "amount": -50000
+        },
+        {
+          "order_id": "ORD-1217",
+          "amount": -50000
+        }
+      ]
+    },
+    {
+      "name": "invalid_status",
+      "category": "validity",
+      "severity": "critical",
+      "table": "orders",
+      "description": "status order harus salah satu dari COMPLETED, PENDING, CANCELLED, REFUNDED.",
+      "failed_rows": 3,
+      "total_rows": 230,
+      "status": "FAIL",
+      "error": null,
+      "sample": [
+        {
+          "order_id": "ORD-1198",
+          "status": "PAID"
+        },
+        {
+          "order_id": "ORD-1055",
+          "status": "PAID"
+        },
+        {
+          "order_id": "ORD-1085",
+          "status": "DONE"
+        }
+      ]
+    },
+    {
+      "name": "future_order_date",
+      "category": "validity",
+      "severity": "critical",
+      "table": "orders",
+      "description": "Tanggal order tidak boleh melewati tanggal acuan (data masa depan).",
+      "failed_rows": 2,
+      "total_rows": 230,
+      "status": "FAIL",
+      "error": null,
+      "sample": [
+        {
+          "order_id": "ORD-1100",
+          "order_date": "2027-01-15"
+        },
+        {
+          "order_id": "ORD-1161",
+          "order_date": "2027-01-15"
+        }
+      ]
+    },
+    {
+      "name": "amount_mismatch",
+      "category": "consistency",
+      "severity": "critical",
+      "table": "orders_dedup",
+      "description": "Total pembayaran valid harus sama dengan nominal order (toleransi dapat diatur).",
+      "failed_rows": 12,
+      "total_rows": 220,
+      "status": "FAIL",
+      "error": null,
+      "sample": [
+        {
+          "order_id": "ORD-1121",
+          "order_amount": 199000,
+          "paid_amount": 398000,
+          "difference": 199000
+        },
+        {
+          "order_id": "ORD-1220",
+          "order_amount": 99000,
+          "paid_amount": 198000,
+          "difference": 99000
+        },
+        {
+          "order_id": "ORD-1165",
+          "order_amount": 75000,
+          "paid_amount": 150000,
+          "difference": 75000
+        }
+      ]
+    },
+    {
+      "name": "orphan_payment",
+      "category": "consistency",
+      "severity": "critical",
+      "table": "payments",
+      "description": "Pembayaran harus selalu merujuk ke order yang ada (integritas referensial).",
+      "failed_rows": 6,
+      "total_rows": 214,
+      "status": "FAIL",
+      "error": null,
+      "sample": [
+        {
+          "payment_id": "PAY-0209",
+          "order_id": "ORD-9001",
+          "paid_amount": 199000,
+          "status": "PAID"
+        },
+        {
+          "payment_id": "PAY-0210",
+          "order_id": "ORD-9002",
+          "paid_amount": 350000,
+          "status": "PAID"
+        },
+        {
+          "payment_id": "PAY-0211",
+          "order_id": "ORD-9003",
+          "paid_amount": 499000,
+          "status": "PAID"
+        }
+      ]
+    },
+    {
+      "name": "payment_before_order",
+      "category": "consistency",
+      "severity": "warning",
+      "table": "payments",
+      "description": "Tanggal pembayaran tidak boleh lebih awal dari tanggal order.",
+      "failed_rows": 2,
+      "total_rows": 214,
+      "status": "FAIL",
+      "error": null,
+      "sample": [
+        {
+          "payment_id": "PAY-0159",
+          "order_id": "ORD-1170",
+          "paid_at": "2026-10-03",
+          "order_date": "2026-10-06"
+        },
+        {
+          "payment_id": "PAY-0009",
+          "order_id": "ORD-1009",
+          "paid_at": "2026-10-04",
+          "order_date": "2026-10-07"
+        }
+      ]
+    },
+    {
+      "name": "stale_data",
+      "category": "timeliness",
+      "severity": "warning",
+      "table": "orders",
+      "description": "Data terbaru tidak boleh lebih lama dari batas freshness (default 2 hari).",
+      "failed_rows": 0,
+      "total_rows": 230,
+      "status": "PASS",
+      "error": null,
+      "sample": []
+    },
+    {
+      "name": "late_payment",
+      "category": "timeliness",
+      "severity": "info",
+      "table": "payments",
+      "description": "Pembayaran yang lebih dari 7 hari setelah order perlu ditinjau.",
+      "failed_rows": 2,
+      "total_rows": 214,
+      "status": "FAIL",
+      "error": null,
+      "sample": [
+        {
+          "payment_id": "PAY-0073",
+          "order_id": "ORD-1077",
+          "paid_at": "2026-11-03",
+          "order_date": "2026-10-19",
+          "days_late": 15
+        },
+        {
+          "payment_id": "PAY-0158",
+          "order_id": "ORD-1169",
+          "paid_at": "2026-10-22",
+          "order_date": "2026-10-07",
+          "days_late": 15
+        }
+      ]
+    },
+    {
+      "name": "non_positive_paid_amount",
+      "category": "validity",
+      "severity": "critical",
+      "table": "payments",
+      "description": "Nominal pembayaran tidak boleh negatif atau nol.",
+      "failed_rows": 2,
+      "total_rows": 214,
+      "status": "FAIL",
+      "error": null,
+      "sample": [
+        {
+          "payment_id": "PAY-0041",
+          "order_id": "ORD-1043",
+          "paid_amount": -50000
+        },
+        {
+          "payment_id": "PAY-0204",
+          "order_id": "ORD-1217",
+          "paid_amount": -50000
+        }
+      ]
+    }
+  ],
+  "reconciliation": {
+    "total_order_rows": 230,
+    "unique_orders": 220,
+    "duplicate_order_rows": 7,
+    "cross_channel_duplicates": 3,
+    "total_payment_rows": 214,
+    "matched_orders": 190,
+    "amount_mismatch": 12,
+    "order_without_payment": 18,
+    "orphan_payments": 6,
+    "duplicate_payments": 4,
+    "mismatch_abs_amount": 608000,
+    "orphan_amount": 1297000,
+    "unpaid_order_amount": 3213000,
+    "amount_at_risk": 5118000
+  },
+  "rejected_rows": 0
+}

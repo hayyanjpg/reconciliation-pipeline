@@ -1,0 +1,27 @@
+{
+  "mode": "dirty",
+  "seed": 42,
+  "as_of": "2026-10-31",
+  "base_orders": 220,
+  "order_rows_written": 230,
+  "payment_rows_written": 214,
+  "expected": {
+    "cross_channel_duplicates": 3,
+    "duplicate_order_rows": 7,
+    "duplicate_order_id_check": 9,
+    "duplicate_payment_per_order": 4,
+    "amount_mismatch": 12,
+    "missing_customer_id": 5,
+    "invalid_status": 3,
+    "non_positive_amount": 2,
+    "non_positive_paid_amount": 2,
+    "future_order_date": 2,
+    "unparseable_order_date": 2,
+    "missing_amount": 1,
+    "orders_without_payment": 18,
+    "orphan_payments": 6,
+    "payment_before_order": 2,
+    "late_payment": 2,
+    "missing_paid_at": 2
+  }
+}

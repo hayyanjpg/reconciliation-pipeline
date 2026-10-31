@@ -1,0 +1,17 @@
+[project]
+name = "data-quality-qa-portfolio"
+version = "1.0.0"
+description = "Pipeline Data Quality Assurance: normalisasi, 16 SQL checks, rekonsiliasi order vs payment, dan dashboard."
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+dashboard = ["pandas>=2.0", "streamlit>=1.30", "plotly>=5.18"]
+dev = ["pytest>=7.0"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

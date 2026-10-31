@@ -1,0 +1,8 @@
+order_id,customer_id,order_date,amount,status,channel,source_file,raw_order_date,raw_amount,duplicate_of_source
+ORD-1008,CUST-055,2026-10-06,199000,COMPLETED,WEB,orders_web.csv,2026-10-06,199000,orders_web.csv
+ORD-1010,CUST-046,2026-10-04,199000,COMPLETED,WEB,orders_web.csv,2026-10-04,199000,orders_web.csv
+ORD-1008,CUST-055,2026-10-06,199000,COMPLETED,WEB,orders_web.csv,2026-10-06,199000,orders_web.csv
+ORD-1001,CUST-015,2026-10-21,45000,COMPLETED,APP,orders_app.csv,21/10/2026,45.000,orders_app.csv
+ORD-1003,CUST-070,2026-10-22,75000,COMPLETED,APP,orders_app.csv,22/10/2026,"75.000,00",orders_app.csv
+ORD-1005,CUST-078,2026-10-17,45000,COMPLETED,APP,orders_app.csv,17/10/2026,45.000,orders_app.csv
+ORD-1007,CUST-036,2026-10-19,45000,COMPLETED,APP,orders_app.csv,19/10/2026,"45.000,00",orders_app.csv

@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.env
+.streamlit/secrets.toml
+reports/qa.db
+reports_clean/qa.db
+*.log
+
+# full stack
+node_modules/
+fullstack/frontend/dist/
+fullstack/backend/storage/
+fullstack/backend/.pytest_cache/
+*.db

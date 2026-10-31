@@ -1,0 +1,4 @@
+order_id,channels,source_files,rows
+ORD-1002,"APP, WEB","orders_app.csv, orders_web.csv",2
+ORD-1004,"APP, WEB","orders_app.csv, orders_web.csv",2
+ORD-1006,"APP, WEB","orders_app.csv, orders_web.csv",2

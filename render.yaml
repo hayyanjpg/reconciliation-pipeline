@@ -1,0 +1,23 @@
+databases:
+  - name: dq-studio-db
+    plan: free
+    databaseName: dq_studio
+    user: dq_studio
+
+services:
+  - type: web
+    name: dq-studio
+    runtime: docker
+    plan: free
+    dockerfilePath: ./fullstack/Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: dq-studio-db
+          property: connectionString
+      - key: RUN_TTL_HOURS
+        value: "24"
+      - key: MAX_FILE_MB
+        value: "10"
