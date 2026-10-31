@@ -3,23 +3,51 @@ title: DQ Studio Backend
 emoji: 🛡️
 colorFrom: indigo
 colorTo: green
-sdk: gradio
+sdk: streamlit
 app_file: app.py
-app_port: 7860
 pinned: false
 ---
 
-# Data Quality QA Portfolio - Rekonsiliasi Order & Payment
+# Multichannel Order & Payment Reconciliation Pipeline
+### Data Engineering & Data Quality Portfolio
 
-Pipeline Data Quality Assurance end-to-end untuk data order dan payment
-multichannel: normalisasi, 16 SQL check, rekonsiliasi, laporan harian, dan
-dashboard. Dibuat untuk menunjukkan kompetensi **Data Quality Assurance /
-Data Analyst**: menjaga integritas data, menelusuri akar masalah, dan
-mengomunikasikan temuan dengan angka.
+Pipeline Data Engineering & Data Quality end-to-end untuk data transaksi order dan payment multichannel (Web & Mobile App): ingestion, normalisasi data mentah, 16 automated SQL audit checks, rekonsiliasi finansial, reporting otomatis, serta visualisasi via Dashboard Full-Stack (FastAPI + React) dan Streamlit.
 
-- Python 3.10+ | SQL (SQLite) | Plotly | Streamlit | pytest
-- 29 automated test, 16 SQL check, 2 dataset (kotor dan bersih)
-- Pipeline inti tanpa Docker, tanpa API key, tanpa database eksternal
+Proyek ini dibangun untuk mendemonstrasikan kompetensi **Data Engineer**:
+- **Data Integration & ETL/ELT**: Ekstraksi dan pembersihan data dari berbagai sumber dengan format heterogen.
+- **Data Integrity & Reconciliation**: Memastikan transaksi matched, mendeteksi kebocoran nominal, *orphan payments*, dan *double charge*.
+- **Data Quality Framework**: Audit kualitas data otomatis berbasis SQL sebelum masuk ke data warehouse / lapisan analitik.
+- **Full-Stack Data Application**: Integrasi backend pipeline asinkronus ke frontend analitik yang interaktif.
+
+- **Tech Stack**: Python 3.10+ | SQL (SQLite/PostgreSQL) | FastAPI | React + Vite + Tailwind | Streamlit | pytest
+- **Pengujian**: 39 automated tests (29 pipeline + 10 API), 16 SQL checks, 2 skenario dataset (kotor vs bersih)
+
+---
+
+## 📸 Tampilan Antarmuka (Screenshots)
+
+Berikut preview antarmuka aplikasi pemantauan rekonsiliasi dan kualitas data:
+
+### 1. Full-Stack Data Studio (React + Vite + Tailwind + Recharts)
+Aplikasi interaktif untuk upload batch file CSV, validasi skema otomatis secara async, inspeksi status checks, serta breakdown visual rekonsiliasi.
+
+![Fullstack Studio Dashboard](docs/screenshots/fullstack-dashboard.png)
+*Screenshot 1: Tampilan Dashboard Utama Full-Stack Studio (Ringkasan Run, KPI Metrik, dan Visualisasi Recharts)*
+
+![Fullstack Upload & Validation](docs/screenshots/fullstack-upload.png)
+*Screenshot 2: Fitur upload CSV multichannel, validasi header & preview anomali secara real-time*
+
+---
+
+### 2. Streamlit Analytical Dashboard
+Dashboard eksploratif untuk tim audit & data analyst dengan filter interaktif, rincian 16 SQL check, dan download laporan harian.
+
+![Streamlit Dashboard](docs/screenshots/streamlit-dashboard.png)
+*Screenshot 3: Streamlit Data Quality & Reconciliation Dashboard (KPI, Pass Rate Gauge, & Tab Investigasi)*
+
+> 💡 *File tangkapan layar dapat Anda letakkan di folder `docs/screenshots/` dengan nama `fullstack-dashboard.png`, `fullstack-upload.png`, dan `streamlit-dashboard.png`.*
+
+---
 
 ## Ringkasan hasil
 
@@ -132,67 +160,115 @@ bisnis mudah direview dan ditambah tanpa mengubah kode Python.
 - Jalankan **rekonsiliasi harian** dengan ambang severity dan matriks eskalasi.
 - Tambahkan **alerting** untuk critical check (belum termasuk di proyek ini).
 
-## Cara menjalankan
+## 🚀 Panduan Menjalankan di Komputer Lokal
 
-```bash
-python -m venv .venv
-# Windows
-.venv\Scripts\activate
-# Linux/macOS
-source .venv/bin/activate
+### Prasyarat
+- **Python**: 3.10 atau lebih baru
+- **Node.js**: 18 atau lebih baru (dengan `npm`)
+- **Git**
 
-pip install -r requirements.txt
+---
 
-# dataset kotor dan bersih
-python scripts/generate_sample_data.py
-python scripts/generate_sample_data.py --clean
+### 1. Menjalankan Full-Stack App (FastAPI + React)
 
-# pipeline
-python scripts/run_pipeline.py --as-of 2026-10-31
-python scripts/run_pipeline.py --raw-dir data/clean --out-dir reports_clean --as-of 2026-10-31
+Aplikasi Full-Stack menggabungkan **FastAPI** di backend (`port 8000`) dan **React Vite + Tailwind** di frontend (`port 5173`).
 
-# test
-python -m pytest -q
-
-# dashboard
-streamlit run streamlit/dashboard.py
-```
-
-Output utama:
-
-- `reports/daily_report.md` - laporan harian siap kirim.
-- `reports/dq_summary.md` - tabel 16 check beserta sampel baris gagal.
-- `reports/dq_summary.json` - data untuk dashboard.
-- `reports/processed/*.csv` - matched, mismatch, orphan, duplikat, rejected.
-- `reports_clean/*` - hasil pada dataset bersih (16/16 PASS).
-
-## Dashboard
-
-Tema kustom dengan hero header, 5 kartu KPI, gauge pass rate, donut status,
-bar chart check gagal, filter, dan tombol unduh.
-
-- **Ringkasan** - KPI, pass rate, distribusi status, check gagal, dampak nominal.
-- **Checks** - filter status/severity/pencarian, tabel berwarna, sampel baris gagal.
-- **Rekonsiliasi** - mismatch per channel, pembayaran yatim, order belum dibayar.
-- **Data Bermasalah** - baris ditolak, duplikat, dan pembayaran ganda.
-- **Laporan Harian** - render `daily_report.md` siap kirim.
-
-Ganti dataset lewat sidebar (Dirty/Clean) untuk membandingkan 12,5% vs 100%.
-
-## Full-stack app (FastAPI + React)
-
-Aplikasi upload dengan template CSV, validasi otomatis, job async, dan dashboard
-hasil. Panduan lengkap: `fullstack/README.md` dan `docs/fullstack-panduan.md`.
-
+#### Opsi A: Otomatis via PowerShell Script (Windows)
+Jalankan satu perintah dari root folder proyek:
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts\run_fullstack.ps1
 ```
+*Script ini otomatis menginstal dependensi backend & frontend, lalu menyalakan kedua server secara paralel.*
 
-- **Frontend** - React + Tailwind + Recharts (`fullstack/frontend`).
-- **Backend** - FastAPI + SQLAlchemy, SQLite lokal atau Postgres (`fullstack/backend`).
-- **Satu skema** - template, validasi, dan loader memakai `src/dq/schema.py`.
-- **Deploy** - satu service lewat `fullstack/Dockerfile` + `render.yaml`.
-- **Demo instan** - tambahkan `?demo=1` pada URL untuk langsung menjalankan data demo.
+#### Opsi B: Manual via 2 Terminal (Direkomendasikan untuk Pemahaman & Debugging)
+
+**Terminal 1 — Backend (FastAPI):**
+```bash
+# 1. Masuk ke direktori backend
+cd fullstack/backend
+
+# 2. Buat virtual environment & aktifkan
+python -m venv .venv
+# Windows (PowerShell / CMD):
+.venv\Scripts\activate
+# Linux / macOS:
+# source .venv/bin/activate
+
+# 3. Install dependensi backend
+pip install -r requirements.txt
+
+# 4. Jalankan backend server
+python -m uvicorn app.main:app --reload --port 8000
+```
+- API Server: `http://127.0.0.1:8000`
+- Swagger Interactive Docs: `http://127.0.0.1:8000/docs`
+
+**Terminal 2 — Frontend (React + Vite):**
+```bash
+# 1. Buka terminal baru dan masuk ke direktori frontend
+cd fullstack/frontend
+
+# 2. Install dependensi Node.js
+npm install
+
+# 3. Jalankan Vite dev server
+npm run dev
+```
+- Frontend UI: `http://127.0.0.1:5173`
+
+> 💡 **Demo Instan:** Buka browser di **`http://127.0.0.1:5173/?demo=1`** untuk langsung menjalankan pipeline dengan dataset demo tanpa perlu upload CSV manual.
+
+---
+
+### 2. Menjalankan Pipeline CLI & Streamlit Dashboard
+
+Jika ingin menguji pipeline data secara batch via CLI dan mengeksplorasi data menggunakan dashboard Streamlit:
+
+```bash
+# Dari root directory:
+pip install -r requirements.txt
+
+# 1. Generate dataset sintetis (kotor dan bersih)
+python scripts/generate_sample_data.py
+python scripts/generate_sample_data.py --clean
+
+# 2. Eksekusi data pipeline ETL & rekonsiliasi
+python scripts/run_pipeline.py --as-of 2026-10-31
+python scripts/run_pipeline.py --raw-dir data/clean --out-dir reports_clean --as-of 2026-10-31
+
+# 3. Jalankan dashboard analitik Streamlit
+streamlit run streamlit/dashboard.py
+```
+Dashboard akan otomatis terbuka pada `http://localhost:8501`.
+
+---
+
+### 3. Menjalankan Automated Testing
+
+Memverifikasi integritas pipeline dan API endpoint:
+
+```bash
+# Core Pipeline & DQ Tests (29 tests)
+python -m pytest tests/ -q
+
+# Fullstack Backend Tests (10 tests)
+cd fullstack/backend
+python -m pytest tests/ -q
+
+# Frontend Typecheck
+cd ../frontend
+npm run typecheck
+```
+
+---
+
+## Output Pipeline Utama
+
+- `reports/daily_report.md` - Laporan ringkasan harian siap kirim ke stakeholder.
+- `reports/dq_summary.md` - Tabel detail 16 DQ checks beserta sampel baris gagal.
+- `reports/dq_summary.json` - Data payload terstruktur untuk konsumsi dashboard.
+- `reports/processed/*.csv` - Dataset terpisah: `matched`, `mismatch`, `orphan`, `duplicates`, `rejected`.
+- `reports_clean/*` - Hasil pengujian pada data valid (16/16 checks PASS).
 
 ## Struktur repo
 
