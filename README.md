@@ -1,6 +1,6 @@
 ---
 title: DQ Studio Backend
-emoji: 🛡️
+emoji:
 colorFrom: indigo
 colorTo: green
 sdk: streamlit
@@ -45,7 +45,7 @@ Dashboard eksploratif untuk tim audit & data analyst dengan filter interaktif, r
 ![Streamlit Dashboard](docs/screenshots/streamlit-dashboard.png)
 *Screenshot 3: Streamlit Data Quality & Reconciliation Dashboard (KPI, Pass Rate Gauge, & Tab Investigasi)*
 
-> 💡 *File tangkapan layar dapat Anda letakkan di folder `docs/screenshots/` dengan nama `fullstack-dashboard.png`, `fullstack-upload.png`, dan `streamlit-dashboard.png`.*
+>  *File tangkapan layar dapat Anda letakkan di folder `docs/screenshots/` dengan nama `fullstack-dashboard.png`, `fullstack-upload.png`, dan `streamlit-dashboard.png`.*
 
 ---
 
@@ -160,7 +160,7 @@ bisnis mudah direview dan ditambah tanpa mengubah kode Python.
 - Jalankan **rekonsiliasi harian** dengan ambang severity dan matriks eskalasi.
 - Tambahkan **alerting** untuk critical check (belum termasuk di proyek ini).
 
-## 🚀 Panduan Menjalankan di Komputer Lokal
+##  Panduan Menjalankan di Komputer Lokal
 
 ### Prasyarat
 - **Python**: 3.10 atau lebih baru
@@ -216,7 +216,7 @@ npm run dev
 ```
 - Frontend UI: `http://127.0.0.1:5173`
 
-> 💡 **Demo Instan:** Buka browser di **`http://127.0.0.1:5173/?demo=1`** untuk langsung menjalankan pipeline dengan dataset demo tanpa perlu upload CSV manual.
+>  **Demo Instan:** Buka browser di **`http://127.0.0.1:5173/?demo=1`** untuk langsung menjalankan pipeline dengan dataset demo tanpa perlu upload CSV manual.
 
 ---
 
