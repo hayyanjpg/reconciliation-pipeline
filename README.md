@@ -45,8 +45,6 @@ Dashboard eksploratif untuk tim audit & data analyst dengan filter interaktif, r
 ![Streamlit Dashboard](docs/screenshots/streamlit-dashboard.png)
 *Screenshot 3: Streamlit Data Quality & Reconciliation Dashboard (KPI, Pass Rate Gauge, & Tab Investigasi)*
 
->  *File tangkapan layar dapat Anda letakkan di folder `docs/screenshots/` dengan nama `fullstack-dashboard.png`, `fullstack-upload.png`, dan `streamlit-dashboard.png`.*
-
 ---
 
 ## Ringkasan hasil
