@@ -31,7 +31,8 @@
 
 > Pipeline Data Quality Assurance untuk data order dan payment multichannel:
 > normalisasi, 16 SQL check, rekonsiliasi, laporan harian, dan dashboard.
-> Divalidasi dengan dataset kotor dan bersih (16/16 PASS).
+> Divalidasi dengan 39 automated test (29 pipeline + 10 API) dan dua dataset:
+> kotor 2/16 check lolos, bersih 16/16 PASS tanpa false positive.
 
 ## 4. Deskripsi portofolio (panjang)
 
@@ -42,15 +43,15 @@
 > nominal, orphan payment, dan freshness. Hasilnya berupa laporan harian,
 > tabel baris bermasalah, dan dashboard Streamlit. Pada dataset uji, pipeline
 > menemukan 7 baris duplikat, 3 duplikat antar channel, 6 pembayaran yatim, dan
-> 12 mismatch dengan nominal berisiko Rp 5,1 juta. Pada dataset bersih, seluruh
+> 12 mismatch dengan nominal berisiko Rp 5.118.000. Pada dataset bersih, seluruh
 > 16 check lulus sehingga tidak ada false positive.
 
 ## 5. Cara menaruh di CV
 
 ```text
-Data Quality Assurance Portfolio - github.com/<username>/data-quality-qa-portfolio
+Reconciliation Pipeline - github.com/hayyanjpg/reconciliation-pipeline
 Pipeline normalisasi + 16 SQL checks + rekonsiliasi order/payment + dashboard.
-Menemukan 7 duplikat, 6 orphan payment, 12 mismatch (Rp 5,1 juta berisiko);
-16/16 check PASS pada dataset bersih. Python, SQL, FastAPI, React, Tailwind,
-SQLite/Postgres, Docker, pytest.
+Menemukan 7 duplikat, 6 orphan payment, 12 mismatch (Rp 5.118.000 berisiko);
+16/16 check PASS pada dataset bersih. 39 automated test (29 pipeline + 10 API).
+Python, SQL, FastAPI, React, Streamlit, SQLite/Postgres, Docker, pytest.
 ```
